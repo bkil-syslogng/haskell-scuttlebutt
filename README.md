@@ -33,7 +33,10 @@ multiple network/gossip protocols could be used at the same time for maximal int
 
 ## Compiling
 
-* TODO: package name
+``` bash
+$ stack setup
+$ stack test
+```
 
 ## Contacting the team
 
