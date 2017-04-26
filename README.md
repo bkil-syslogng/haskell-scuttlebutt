@@ -1,17 +1,17 @@
 # Aim
 
-Develop a higher level middleware/framework for the Scuttlebut.nz (SSB) network
+Develop a higher level middleware/framework for the Scuttlebutt.nz (SSB) network
 for which it would be easy to develop various client applications.
 
 As a bonus, it would be great if client applications could be written in a way that
 multiple network/gossip protocols could be used at the same time for maximal interoperability.
 
-# Minimal viable product
+## Minimal viable product
 
 * a command line tool to access basic functionality of patchwork (TODO: describe exactly)
   * ...
 
-# Schedule
+## Plan
 
 * develop a simple command line tool
 * ...
@@ -26,9 +26,15 @@ multiple network/gossip protocols could be used at the same time for maximal int
 
 # Development
 
+## Methods
+
 * TDD (test driven development)
 * Clean Code (refer to Robert C. Martin)
 
-# Contacting the team
+## Compiling
+
+* TODO: package name
+
+## Contacting the team
 
 * TODO (SSB feed anyone?)
