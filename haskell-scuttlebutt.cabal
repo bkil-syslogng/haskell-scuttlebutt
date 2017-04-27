@@ -4,9 +4,9 @@ synopsis:            haskell library for the secure scuttlebutt distributed obje
 homepage:            https://github.com/bkil-syslogng/haskell-scuttlebutt#readme
 license:             BSD3
 license-file:        LICENSE
-author:              Tamas Nagy, Peter Ferenc Hajdu
+author:              bkil.hu, Peter Ferenc Hajdu
 maintainer:          peter.ferenc.hajdu@gmail.com
-copyright:           2017 Tamas Nagy, Peter Ferenc Hajdu
+copyright:           2017 bkil.hu, Peter Ferenc Hajdu
 category:            Network
 build-type:          Simple
 extra-source-files:  README.md
