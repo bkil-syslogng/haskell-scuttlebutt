@@ -1,4 +1,6 @@
-import Network.Socket
+import Network.Socket.ByteString
+import Network.Socket hiding (recvFrom)
+import Ssb.Discovery
 
 main :: IO ()
 main = withSocketsDo $ do
@@ -6,12 +8,15 @@ main = withSocketsDo $ do
   print addresses
   let server = head addresses
   s <- socket (addrFamily server) Datagram defaultProtocol
-  bindSocket s (addrAddress server)
+  bind s (addrAddress server)
   putStrLn "Server started ..."
   handleConnections s
 
 handleConnections :: Socket -> IO ()
 handleConnections conn = do
-  stuff <- recvFrom conn 1
-  print stuff
+  (stuff, _) <- recvFrom conn 1024
+  let maybePeerInfo = parseDiscoveryMessage stuff
+  maybe (putStrLn "Malformed discovery message received.")
+        print
+        maybePeerInfo
   handleConnections conn
