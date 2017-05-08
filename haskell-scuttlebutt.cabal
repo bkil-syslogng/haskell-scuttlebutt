@@ -66,6 +66,8 @@ executable leveldb-reader
                      , resourcet
                      , bytestring
                      , leveldb-haskell
+                     , haskell-scuttlebutt
+                     , aeson
                      , data-default
   default-language:    Haskell2010
 
