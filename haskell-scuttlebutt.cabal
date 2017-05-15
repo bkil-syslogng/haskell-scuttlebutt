@@ -56,6 +56,21 @@ executable peer-search-sniffer
                      , network
   default-language:    Haskell2010
 
+executable follow-feed
+  hs-source-dirs:      snippets
+  main-is:             FollowFeed.hs
+  ghc-options:         -threaded
+  build-depends:       base
+                     , haskell-scuttlebutt
+                     , network
+                     , resourcet
+                     , bytestring
+                     , leveldb-haskell
+                     , haskell-scuttlebutt
+                     , aeson
+                     , data-default
+  default-language:    Haskell2010
+
 executable leveldb-reader
   hs-source-dirs:      snippets
   main-is:             LevelDbDemo.hs

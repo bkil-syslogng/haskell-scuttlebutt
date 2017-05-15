@@ -33,8 +33,10 @@ streamDb folder =
   where
     entries iter = liftIO $ (S.toList (S.entrySlice iter S.AllKeys S.Asc) :: IO [(S.Key, S.Value)])
 
-data Content = Content {root :: String} deriving (Generic, Eq, Show)
-instance FromJSON Content
+--data Content = Content {root :: String} deriving (Generic, Eq, Show)
+--instance FromJSON Content
+
+type Content = Object
 
 main :: IO ()
 main = do
