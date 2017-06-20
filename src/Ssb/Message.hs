@@ -22,4 +22,5 @@ data Message a = Message
   } deriving (Show, Eq, Generic)
 
 instance FromJSON a => FromJSON (Message a)
+instance ToJSON a => ToJSON (Message a)
 
