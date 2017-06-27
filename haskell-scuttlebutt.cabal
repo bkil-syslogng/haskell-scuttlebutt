@@ -94,6 +94,8 @@ executable message-signature-check
                      , bytestring
                      , base64-bytestring
                      , ed25519
+                     , aeson
+                     , haskell-scuttlebutt
   default-language:    Haskell2010
 
 executable scb-tojson
