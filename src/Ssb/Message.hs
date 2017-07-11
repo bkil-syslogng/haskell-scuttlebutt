@@ -12,7 +12,7 @@ type HashType = String
 type Signature = String
 
 data Message a = Message
-  { previous :: MessageLink
+  { previous :: Maybe MessageLink
   , author :: FeedLink
   , sequence :: Int64
   , timestamp :: Int64

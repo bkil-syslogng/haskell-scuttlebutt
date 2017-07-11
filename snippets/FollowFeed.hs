@@ -38,7 +38,7 @@ getFeed :: MonadResource m => DB -> ByteString -> m ([Msg])
 getFeed db messageId = do
   maybeMessage <- getMessage db messageId
   case maybeMessage of
-    Just msg -> (msg:) <$> (getFeed db $ pack $ previous msg)
+    Just msg -> (msg:) <$> (getFeed db $ pack $ fromJust $ previous msg)
     Nothing  -> return []
 
 
