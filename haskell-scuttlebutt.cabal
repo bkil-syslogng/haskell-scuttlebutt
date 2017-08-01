@@ -108,6 +108,7 @@ executable feed-reader
                      , ed25519
                      , aeson
                      , haskell-scuttlebutt
+                     , containers
   default-language:    Haskell2010
 
 executable scb-tojson
