@@ -36,11 +36,15 @@ buildFeedMap = foldl mergeStuff (Map.fromList [])
         updateFeed frame Nothing = let message = value frame
                                     in Just $ Map.fromList [(key frame, message)]
 
+printFeedReport :: FeedLink -> FeedMap -> IO ()
+printFeedReport feedId feed = Prelude.putStrLn $ "feed: " ++ feedId ++ " " ++ (show $ Map.size feed)
+
 main :: IO ()
 main = do
   args <- getArgs
   chain <- LBS.readFile $ Prelude.head args
-  print $ either
-    (const (Map.fromList []))
-    buildFeedMap
-    (parseFrames chain)
+  let feeds = either (const (Map.fromList [])) buildFeedMap (parseFrames chain)
+  let numberOfFeeds = Map.size feeds
+  Prelude.putStrLn $ "Number of feeds: " ++ (show numberOfFeeds)
+  Map.traverseWithKey printFeedReport feeds
+  return ()
