@@ -5,8 +5,7 @@
 module Main where
 
 import           GHC.Generics
-import           Ssb
-import           Ssb.Message
+import           Ssb (Message(..))
 import           Data.Maybe
 import           System.Environment           (getArgs)
 import           Control.Monad

@@ -16,6 +16,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     Ssb
                      , Ssb.Address
+                     , Ssb.Feed
                      , Ssb.Message
                      , Ssb.Key
                      , Ssb.Discovery
@@ -26,6 +27,7 @@ library
                      , aeson
                      , ed25519
                      , network
+                     , containers
   default-language:    Haskell2010
 
 executable signature-snippets
@@ -140,6 +142,7 @@ test-suite haskell-scuttlebutt-test
                      , hspec
                      , bytestring
                      , aeson
+                     , containers
   other-modules:     LocalDiscoverySpec
                    , AddressSpec
                    , KeySpec
