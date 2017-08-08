@@ -19,7 +19,7 @@ spec :: Spec
 spec = describe "message" $ do
          it "extracts message content" $ do
             let (Just message) = (decode originalMessage) :: Maybe (Message Content)
-            previous message `shouldBe` "%3AWRZYdDHKOmLOWvzHbwJFjx9g8hOQH/NXZkwciA63Y=.sha256"
+            previous message `shouldBe` (Just "%3AWRZYdDHKOmLOWvzHbwJFjx9g8hOQH/NXZkwciA63Y=.sha256")
             author message `shouldBe` "@EMovhfIrFk4NihAKnRNhrfRaqIhBv1Wj8pTxJNgvCCY=.ed25519"
             sequence message `shouldBe` 184
             timestamp message `shouldBe` 1449954503740
