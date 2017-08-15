@@ -12,7 +12,7 @@ spec :: Spec
 spec = do
         let emptyFeed = Ssb.Feed.empty "kutyus"
         let message = Message Nothing "kutyus" 0 0 "hash3" "content" "sig" :: Message String
-        let message2 = Message Nothing "harcsabajusz" 0 0 "hash2" "content2" "sig" :: Message String
+        let message2 = Message (Just "hash3") "harcsabajusz" 1 0 "hash2" "content2" "sig" :: Message String
         let newFeed = add emptyFeed message
 
         describe "message addition" $ do
