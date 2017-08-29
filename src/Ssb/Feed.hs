@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Ssb.Feed (empty, add, get, getOrderedContents, Feed) where
+module Ssb.Feed (empty, add, get, getOrderedContents, Ssb.Feed.length, Feed) where
 
 import Ssb.Message
 import qualified Data.Map as Map
@@ -34,3 +34,6 @@ getOrderedContents feed = retrieveFrom (last feed) []
                                   in case previous message of
                                     Nothing -> currentContent
                                     Just prevId -> retrieveFrom (get feed prevId) currentContent
+
+length :: Feed a -> Int
+length feed = Map.size $ messages feed
