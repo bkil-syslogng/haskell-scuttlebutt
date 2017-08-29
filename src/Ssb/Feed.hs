@@ -1,6 +1,13 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Ssb.Feed (empty, add, get, getOrderedContents, Ssb.Feed.length, Feed) where
+module Ssb.Feed (
+  empty,
+  add,
+  get,
+  getOrderedContents,
+  Ssb.Feed.length,
+  Feed
+  ) where
 
 import Ssb.Message
 import qualified Data.Map as Map
