@@ -40,3 +40,13 @@ spec = do
 
            it "two element feed should return 2" $ do
              Feed.length newFeed2 `shouldBe` 2
+
+        describe "lastMessage" $ do
+           it "empty feed should return Nothing" $ do
+             lastMessage emptyFeed `shouldBe` (Nothing :: Maybe (Message String))
+
+           it "single element feed should element" $ do
+             lastMessage newFeed `shouldBe` (Just message)
+
+           it "two element feed should return last" $ do
+             lastMessage newFeed2 `shouldBe` (Just message2)

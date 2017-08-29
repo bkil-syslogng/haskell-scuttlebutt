@@ -6,6 +6,7 @@ module Ssb.Feed (
   get,
   getOrderedContents,
   Ssb.Feed.length,
+  lastMessage,
   Feed
   ) where
 
@@ -44,3 +45,6 @@ getOrderedContents feed = retrieveFrom (last feed) []
 
 length :: Feed a -> Int
 length feed = Map.size $ messages feed
+
+lastMessage :: Feed a -> Maybe (Message a)
+lastMessage feed = last feed
