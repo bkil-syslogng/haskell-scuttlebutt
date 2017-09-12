@@ -7,6 +7,7 @@ import Test.Hspec
 import Ssb.Feed as Feed
 import Ssb.Message
 import Data.Map
+import Data.Maybe
 
 spec :: Spec
 spec = do
@@ -50,3 +51,11 @@ spec = do
 
            it "two element feed should return last" $ do
              lastMessage newFeed2 `shouldBe` (Just message2)
+
+        describe "Feed" $ do
+           it "has a functor instance" $ do
+             let lengthFeed = fmap Prelude.length newFeed
+             let lengths = getOrderedContents $ lengthFeed
+             lengths `shouldBe` [7]
+             let lastLength = content $ fromJust $ lastMessage lengthFeed
+             lastLength `shouldBe` 7

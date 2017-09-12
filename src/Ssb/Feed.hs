@@ -20,6 +20,13 @@ data Feed a = Feed { name :: FeedLink
                    }
                    deriving (Show, Eq)
 
+instance Functor Feed where
+  fmap f feed = let oldMessages = Map.toList $ messages feed
+                    oldLast = last feed
+                 in feed {
+                   messages = Map.fromList $ fmap (\(k, m) -> (k, fmap f m)) oldMessages,
+                   last = fmap (fmap f) oldLast}
+
 empty :: FeedLink -> Feed a
 empty name = Feed name (Map.fromList []) Nothing
 
