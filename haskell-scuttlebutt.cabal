@@ -16,6 +16,7 @@ library
   hs-source-dirs:      src
   exposed-modules:     Ssb
                      , Ssb.Address
+                     , Ssb.Patchwork
                      , Ssb.Feed
                      , Ssb.Message
                      , Ssb.Key

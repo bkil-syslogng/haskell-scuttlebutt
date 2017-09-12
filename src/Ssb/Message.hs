@@ -24,3 +24,8 @@ data Message a = Message
 instance FromJSON a => FromJSON (Message a)
 instance ToJSON a => ToJSON (Message a)
 
+instance Functor Message where
+  fmap f m = let oldContent = content m
+                 newContent = f oldContent
+             in m {content = newContent}
+

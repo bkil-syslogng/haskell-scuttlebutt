@@ -5,8 +5,10 @@ module MessageSpec where
 
 import Test.Hspec
 import Ssb.Message
+import Ssb.Patchwork
 import GHC.Generics
 import Data.Aeson
+import Data.Maybe
 
 import Prelude hiding (sequence)
 
@@ -26,3 +28,8 @@ spec = describe "message" $ do
             hash message `shouldBe` "sha256"
             content message `shouldBe` Content "%rf1JvoFg1pHE6TkuuMxsjBNevFck7LQvXGhkLMNlaYs=.sha256"
             signature message `shouldBe` "28GiO52GFjJnrwpKo359FamEes7JB9gTiiZaidKLL1C1NRueqGq2IAYQ1V+T2AnBgUJLRZUIyNtLTlBcx4RGAA==.sig.ed25519"
+
+         it "is a functor" $ do
+            let message = fromJust $ decode originalMessage :: Message Value
+            let patchworkMessage = fmap parsePatchwork message :: Message (Maybe PatchworkMessage)
+            isJust (content patchworkMessage) `shouldBe` True
