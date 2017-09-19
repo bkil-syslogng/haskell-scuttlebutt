@@ -1,12 +1,20 @@
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Ssb.Patchwork (
-  PatchworkMessage,
+  PatchworkMessage(..),
   parsePatchwork
   ) where
-
-import Data.Aeson (Value)
-
-data PatchworkMessage = Post deriving (Show)
+import GHC.Generics
+import Data.Aeson (Value(..), decode, Object)
+import Data.Text
+import Data.HashMap.Lazy (lookup)
+import Prelude hiding (lookup)
+data PatchworkMessage = Post {text :: Text} deriving (Show, Eq, Generic)
 
 parsePatchwork :: Value -> Maybe PatchworkMessage
-parsePatchwork _ = Just Post
+parsePatchwork (Object o) = Post <$> getText o
+  where getText o = case lookup "text" o of
+                      Just (String s) -> Just s
+                      _ -> Nothing
+parsePatchwork _ = Nothing
 

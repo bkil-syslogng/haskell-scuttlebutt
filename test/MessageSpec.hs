@@ -18,7 +18,9 @@ data Content = Content {root :: String} deriving (Generic, Eq, Show)
 instance FromJSON Content
 
 spec :: Spec
-spec = describe "message" $ do
+spec =
+  do 
+      describe "message" $ do
          it "extracts message content" $ do
             let (Just message) = (decode originalMessage) :: Maybe (Message Content)
             previous message `shouldBe` (Just "%3AWRZYdDHKOmLOWvzHbwJFjx9g8hOQH/NXZkwciA63Y=.sha256")
@@ -33,3 +35,18 @@ spec = describe "message" $ do
             let message = fromJust $ decode originalMessage :: Message Value
             let patchworkMessage = fmap parsePatchwork message :: Message (Maybe PatchworkMessage)
             isJust (content patchworkMessage) `shouldBe` True
+
+      describe "patchwork parse" $ do
+        it "should not attempt to parse JSON values other than Object" $ do
+                        parsePatchwork ( Bool True) `shouldBe` Nothing
+
+        it "parses the text from a post" $ do
+            let expectedText ="@johnny use https://github.com/ssbc/ssb-msgs and https://github.com/ssbc/ssb-ref is probably useful too."
+            let (Just postContent) = decode "{\n    \"type\": \"post\",\n    \"text\": \"@johnny use https://github.com/ssbc/ssb-msgs and https://github.com/ssbc/ssb-ref is probably useful too.\",\n    \"root\": \"%rf1JvoFg1pHE6TkuuMxsjBNevFck7LQvXGhkLMNlaYs=.sha256\",\n    \"branch\": \"%G37a4PUTbysiETQazyYATwLkfn/ZzigmIheAx905MLU=.sha256\",\n    \"mentions\": [\n      {\n        \"link\": \"@dnr1swLSAgf36g+FzGjNLgmytj2IIyDaYeKZ7F5GdzY=.ed25519\",\n        \"name\": \"johnny\"\n      }\n    ]\n  }" :: Maybe Value
+            let (Just parsed) = parsePatchwork postContent
+            text parsed `shouldBe` expectedText 
+
+        it "does not parse content that is not a post" $ do
+            let (Just postContent) = decode "{\n    \"type\": \"somethingelse\",\n    \"text\": \"@johnny use https://github.com/ssbc/ssb-msgs and https://github.com/ssbc/ssb-ref is probably useful too.\",\n    \"root\": \"%rf1JvoFg1pHE6TkuuMxsjBNevFck7LQvXGhkLMNlaYs=.sha256\",\n    \"branch\": \"%G37a4PUTbysiETQazyYATwLkfn/ZzigmIheAx905MLU=.sha256\",\n    \"mentions\": [\n      {\n        \"link\": \"@dnr1swLSAgf36g+FzGjNLgmytj2IIyDaYeKZ7F5GdzY=.ed25519\",\n        \"name\": \"johnny\"\n      }\n    ]\n  }" :: Maybe Value
+            let parsed = parsePatchwork postContent
+            parsed `shouldBe` Nothing
