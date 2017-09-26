@@ -12,7 +12,9 @@ import Prelude hiding (lookup)
 data PatchworkMessage = Post {text :: Text} deriving (Show, Eq, Generic)
 
 parsePatchwork :: Value -> Maybe PatchworkMessage
-parsePatchwork (Object o) = Post <$> getText o
+parsePatchwork (Object o) = case lookup "type" o of
+                Just (String "post") -> Post <$> getText o
+                _ -> Nothing
   where getText o = case lookup "text" o of
                       Just (String s) -> Just s
                       _ -> Nothing
