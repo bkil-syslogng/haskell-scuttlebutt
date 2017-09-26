@@ -41,6 +41,7 @@ spec = do
 
            it "two element feed should return 2" $ do
              Feed.length newFeed2 `shouldBe` 2
+             print newFeed2
 
         describe "lastMessage" $ do
            it "empty feed should return Nothing" $ do
